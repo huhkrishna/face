@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Recognition Web App</title>
+</head>
+<body>
+    <h1>Face Recognition Web App</h1>
+    <form action="/recognize" method="post">
+        <label for="known_faces_folder">Enter path to folder containing images of known faces:</label><br>
+        <input type="text" id="known_faces_folder" name="known_faces_folder"><br><br>
+        <input type="submit" value="Recognize">
+    </form>
+    <div id="result">
+        <!-- Result will be displayed here -->
+    </div>
+    <script>
+        const form = document.querySelector('form');
+        form.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const formData = new FormData(form);
+            const response = await fetch('/recognize', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+            document.getElementById('result').innerHTML = `<img src="data:image/jpeg;base64,${data.image}" alt="Recognized Image"><p>${data.message}</p>`;
+        });
+    </script>
+</body>
+</html>
