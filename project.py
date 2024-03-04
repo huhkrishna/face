@@ -58,7 +58,7 @@ def main():
     # Open the webcam
     video_capture = cv2.VideoCapture(0)
 
-    # Set video capture properties 
+    # Set video capture properties
     video_capture.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
     video_capture.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
 
